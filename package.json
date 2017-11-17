@@ -84,7 +84,6 @@
   "bugs": {
     "url": "https://github.com/Nitharios/consume-more-stuff/issues"
   },
-  "homepage": "https://github.com/Nitharios/consume-more-stuff#readme",
   "proxy": "http://localhost:8888",
   "devDependencies": {
     "node-sass": "^4.6.0",

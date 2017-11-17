@@ -6,12 +6,13 @@ const redis = require('connect-redis')(session);
 const authenticatePassport = require('./lib/passport');
 const db = require('./models');
 const routes = require('./routes');
-
+const path = require('path');
 const PORT = process.env.PORT || 8888;
 
 const app = express();
 
 // enabling json body-parser and encoding
+app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(bodyParser.urlencoded({ "extended" : false }));
 app.use(bodyParser.json());
 app.use(session({
