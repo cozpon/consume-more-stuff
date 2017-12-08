@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../../actions/auth.actions';
-import { formErrors } from  '../../components/formErrors.components';
 
 class Login extends Component {
   constructor() {
@@ -23,27 +22,18 @@ class Login extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    let userCheck = this.state.username;
-    let passCheck = this.state.password;
 
-    // if(userCheck === '' || userCheck.length < 20 || passCheck === '' || passCheck.length < 5){
-    //   let credsError = "You need both username (3-20 characters) and password (min 5 characters) to login";
-    //   this.setState({
-    //     error: credsError
-    //   });
-    // } else {
-      let loginCreds = {
-        username : this.state.username,
-        password : this.state.password
-      };
+    let loginCreds = {
+      username : this.state.username,
+      password : this.state.password
+    };
 
-      this.props.loginUser(loginCreds);
+    this.props.loginUser(loginCreds);
 
-      this.setState({
-        username : '',
-        password : '',
-      });
-    // }
+    this.setState({
+      username : '',
+      password : '',
+    });
   }
 
   handleUsernameInput(evt) {
