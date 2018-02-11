@@ -228,6 +228,9 @@ textarea {
   @include flex-style(row wrap, center);
   position: relative;
   margin-left: -15px;
+  margin-top: -10px;
+  font-size: 65%;
+  opacity: .7;
 }
 //----------------------------
 #user-welcome {

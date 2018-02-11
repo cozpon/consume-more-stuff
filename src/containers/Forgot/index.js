@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { forgotPassword } from '../../actions/auth.actions';
 
-const crypto = require('crypto');
 
 class Forgot extends Component {
   constructor() {
@@ -20,11 +19,10 @@ class Forgot extends Component {
 
   handlePasswordRecovery(evt) {
     evt.preventDefault();
-    console.log('YO');
     let forgotPasswordEmail = {
       email : this.state.email,
+      redirect: true,
     };
-
     this.props.forgotPassword(forgotPasswordEmail);
 
     this.setState({
@@ -47,7 +45,6 @@ class Forgot extends Component {
     return(
       <div id="login-container">
         <h2>Forgot Password</h2>
-
         <div>
           <center>
             .: Oh noes, that's ok, just enter email below :.
