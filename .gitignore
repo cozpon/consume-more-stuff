@@ -39,6 +39,7 @@ server/config/
 server/lib/scripts/setup.sql
 uploads/
 server/public/uploads/
+server/config/nodemailer
 
 # Typescript v1 declaration files
 typings/
