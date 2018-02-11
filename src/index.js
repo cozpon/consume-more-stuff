@@ -47,15 +47,12 @@ ReactDOM.render(
 
           <Nav />
         </header>
-
         <Route exact path="/" component={App} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={LogIN} />
         <Route path="/items/:id" component={SingleItemView} />
         <Route path="/logout" component={LogOUT} />
         <Route path="/users/:id" component={User}/>
-
-
         <Footer />
       </div>
     </Router>

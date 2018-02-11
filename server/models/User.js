@@ -14,6 +14,12 @@ module.exports = function(sequelize, DataType) {
       unique : true,
       validate : { isEmail: true }
     },
+    resetPasswordToken : {
+      type: DataType.STRING
+    },
+    resetPasswordExpires : {
+      type: DataType.DATE
+    },
   },
   {
     tableName : 'users'

@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "cms",
+    "password": "$h@de",
+    "database": "jnkr",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+  }
+}
