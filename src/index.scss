@@ -224,6 +224,11 @@ textarea {
       padding: 5px 48px;
     }
   }
+.forgot-password {
+  @include flex-style(row wrap, center);
+  position: relative;
+  margin-left: -15px;
+}
 //----------------------------
 #user-welcome {
   text-align: right;

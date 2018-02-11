@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../../actions/auth.actions';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   constructor() {
@@ -69,7 +70,7 @@ class Login extends Component {
       });
     }
   }
-  
+
   componentDidMount() {
     localStorage.clear();
   }
@@ -90,8 +91,8 @@ class Login extends Component {
           </center>
         </div>
 
-        <div className="error-box">       
-           {(this.state.error) && 
+        <div className="error-box">
+           {(this.state.error) &&
           <p className="errors">{this.state.error}</p>
         }
         </div>
@@ -102,7 +103,7 @@ class Login extends Component {
             Enter USERNAME -or- EMAIL
             </div>
          <div>
-            <input 
+            <input
               name="username"
               type="text"
               placeholder="username"
@@ -115,12 +116,12 @@ class Login extends Component {
             PASSWORD
             </div>
             <div>
-            <input 
+            <input
               name="password"
               type="password"
               placeholder="password"
               defaultValue={this.state.password}
-              onChange={this.handlePasswordInput} 
+              onChange={this.handlePasswordInput}
               onBlur={this.handleBlurValidation}/>
             </div>
             <br/>
@@ -131,6 +132,9 @@ class Login extends Component {
               Login
             </button>
           </form>
+        </div>
+        <div className="forgot-password">
+        <Link to="/forgot">Forgot Password?</Link>
         </div>
       </div>
     );
