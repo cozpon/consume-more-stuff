@@ -4,11 +4,13 @@ const register = '/api/auth/register';
 const login = '/api/auth/login';
 const logout = '/api/auth/logout';
 const forgot = '/api/auth/forgot';
+const reset = '/api/auth/reset';
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const FORGOT_PASS = 'FORGOT_PASS';
+export const RESET_PASS = 'RESET_PASS';
 export const ERROR = 'ERROR';
 
 export const registerUser = (registerCreds) => {
@@ -57,6 +59,28 @@ export const forgotPassword = (userEmail) => {
       console.log(response, "RESPONSE DATA");
       dispatch({
         type: FORGOT_PASS,
+        userDetails: response.data
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ERROR,
+        error: 'something went wrong, please try again!'
+      });
+    });
+  };
+};
+
+
+//(gotta hash that password)
+export const resetPassword = (password) => {
+  console.log(password, "UUUUEMAIL");
+  return (dispatch) => {
+    return Axios.post(reset, password)
+    .then((response) => {
+      console.log(response, "RESPONSE DATA");
+      dispatch({
+        type: RESET_PASS,
         userDetails: response.data
       });
     })

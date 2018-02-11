@@ -17,7 +17,6 @@ const router = express.Router();
 //----------NAVIGATION MENU----------FORGOT/LOGIN/LOGOUT/REGISTER
 
 //FORGOT password
-
 router.post('/forgot', (req, res) => {
   return User.findOne({ where : { email: req.body.email } })
   .then(user => {
@@ -62,7 +61,20 @@ router.post('/forgot', (req, res) => {
   });
 });
 
-
+router.get('/reset/:token', (req, res) => {
+  return User.findOne({ where: { resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()} }
+  .then(user => {
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('/forgot');
+    }
+    console.log("yoooo");
+    res.render('reset', {
+      user: req.user
+    });
+    })
+})
+});
 
 //LogIN an authenticated user
 router.post('/login',

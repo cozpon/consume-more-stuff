@@ -15,6 +15,7 @@ import './index.scss';
 import App from './containers/App';
 import User from './containers/User';
 import Forgot from './containers/Forgot';
+import Reset from './containers/Reset';
 import Register from './containers/Register';
 import LogIN from './containers/LogIN';
 import LogOUT from './containers/LogOUT';
@@ -55,6 +56,7 @@ ReactDOM.render(
         <Route path="/logout" component={LogOUT} />
         <Route path="/users/:id" component={User}/>
         <Route path="/forgot" component={Forgot}/>
+        <Route path="/reset/:token" component={Reset}/>
         <Footer />
       </div>
     </Router>
