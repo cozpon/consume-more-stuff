@@ -6,8 +6,6 @@ const async = require('async');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
-
-
 const db = require('../models');
 const validateForm = require('../lib/validate-form');
 const User = db.User;
@@ -25,8 +23,8 @@ router.post('/forgot', (req, res) => {
       let client = nodemailer.createTransport({ //sets up nodemailer
           service: 'SendGrid',
           auth: {
-            user: 'user', // username & password stored in config/nodemailer.js
-            pass: 'pass'  // hidden with .gitignore so as not to push up sensitive details
+            user: 'username', // username & password stored in config/nodemailer.js
+            pass: 'password'  // hidden with .gitignore so as not to push up sensitive details
           }
         });
       let email = {
@@ -60,19 +58,41 @@ router.post('/forgot', (req, res) => {
   });
 });
 
-router.get('/reset/:token', (req, res) => {
-  return User.findOne({ where: { resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()} }
+router.put('/reset/:token', (req, res) => {
+  console.log(req.params); // :token just returning ':token', not the passwordToken
+  return User.findOne({
+    where : { resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()} }
+  })
   .then(user => { // find the user who has the resetPasswordToken attached to them & whose token hasn't expired.
+    console.log("user found daddio");
     if (!user) { // if there is no user, return error and redirect to /forgot
-      req.flash('error', 'Password reset token is invalid or has expired.');
-      return res.redirect('/forgot');
+      //req.flash('error', 'Password reset token is invalid or has expired.');
+    return console.log("error");
     }
-    console.log("yoooo"); //here is where the POST/PUT will edit the password
-    res.render('reset', { // make sure to HASH the new password
-      user: req.user
-    }); // after it PUT's the new password, set resetPasswordToken & resetPasswordExpires to null
-    })
-})
+    else {
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+          user.update({
+            resetPasswordToken: null,
+            resetPasswordExpires: null,
+            password: hash
+          })
+          .then(newPassword => {
+            console.log('Password updated');
+            return res.json({
+              success : true
+            });
+          });
+        });
+      });
+    }
+  })
+  .catch((err) => {
+    console.log("error", err);
+    return res.json({
+      error : 'Oh no! Something went wrong!'
+    });
+  });
 });
 
 //LogIN an authenticated user
@@ -88,6 +108,7 @@ router.post('/login',
     success : true
   });
 });
+
 
 //LogOUT a user
 router.get('/logout', (req, res) => {

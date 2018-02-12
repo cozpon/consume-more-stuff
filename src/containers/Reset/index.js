@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { resetPassword } from '../../actions/auth.actions';
 
-const crypto = require('crypto');
 
 class Reset extends Component {
   constructor() {
@@ -11,6 +10,7 @@ class Reset extends Component {
 
     this.state = {
       password : '',
+      token: '',
       redirect : false, // set initial state to false
     };
 
@@ -20,15 +20,17 @@ class Reset extends Component {
 
   handlePasswordReset(evt) {
     evt.preventDefault();
-    console.log('YO');
-    let resetPassword = {
+    let newPassword = {
       password : this.state.password,
+      token: this.props.match.params.token
+
     };
 
-    this.props.resetPassword(resetPassword);
+    this.props.resetPassword(newPassword);
 
     this.setState({
       password : '',
+      token: ''
     });
   }
 
@@ -65,7 +67,7 @@ class Reset extends Component {
               type="text"
               placeholder="enter new password"
               defaultValue={this.state.password}
-              onChange={this.handleEmailInput} />
+              onChange={this.handlePasswordInput} />
             </div>
             <div>
             <input
@@ -73,7 +75,7 @@ class Reset extends Component {
               type="text"
               placeholder="re-enter new password"
               defaultValue={this.state.password}
-              onChange={this.handleEmailInput} />
+              onChange={this.handlePasswordInput} />
             </div>
             <button
               className="login-btn"

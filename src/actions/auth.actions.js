@@ -74,9 +74,9 @@ export const forgotPassword = (userEmail) => {
 
 //(gotta hash that password)
 export const resetPassword = (password) => {
-  console.log(password, "UUUUEMAIL");
+  console.log(`${password.token}`, "UUUUEMAIL");
   return (dispatch) => {
-    return Axios.post(reset, password)
+    return Axios.put(`${reset}/${password.token}`, password)
     .then((response) => {
       console.log(response, "RESPONSE DATA");
       dispatch({
