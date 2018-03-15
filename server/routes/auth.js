@@ -2,9 +2,9 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const session = require('express-session');
-const async = require('async');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const sendmail = require('../config/mailer.js');
 
 const db = require('../models');
 const validateForm = require('../lib/validate-form');
@@ -23,8 +23,8 @@ router.post('/forgot', (req, res) => {
       let client = nodemailer.createTransport({ //sets up nodemailer
           service: 'SendGrid',
           auth: {
-            user: 'username', // username & password stored in config/nodemailer.js
-            pass: 'password'  // hidden with .gitignore so as not to push up sensitive details
+            user: sendmail.user, // username & password stored in sendmail/nodemailer.js
+            pass: sendmail.pass  // hidden with .gitignore so as not to push up sensitive details
           }
         });
       let email = {

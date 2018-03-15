@@ -39,7 +39,7 @@ server/config/
 server/lib/scripts/setup.sql
 uploads/
 server/public/uploads/
-server/config/nodemailer
+server/config/mailer/
 
 # Typescript v1 declaration files
 typings/
@@ -62,3 +62,4 @@ typings/
 # dotenv environment variables file
 .env
 
+sendgrid.env
