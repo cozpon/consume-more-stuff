@@ -1,5 +1,5 @@
 import Axios from 'axios';
- 
+
 const listOfItems = '/api/items'; // URL to POST to
 
 export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
@@ -13,6 +13,7 @@ export const ERROR = 'ERROR';
 
 //GET single item
 export const loadSingleItem = (id) => {
+  console.log(id);
   return(dispatch) => {
     return Axios.get(listOfItems + `/` + id)
     .then(item => {
@@ -43,8 +44,8 @@ export const loadItems = () => {
   };
 };
 
-//CREATE(POST) new item  
-export const addItem = (newItem) => {  
+//CREATE(POST) new item
+export const addItem = (newItem) => {
   return (dispatch) => {
     return Axios.post(listOfItems, newItem)
     .then(newItemDetails => {
@@ -74,10 +75,10 @@ export const makeItemEditable = (id, editing) => {
 };
 
 //UPDATE(PUT) item
-export const editItem = (updatedItem) => {    
+export const editItem = (updatedItem) => {
   return (dispatch) => {
     return Axios.put(`${listOfItems}/${updatedItem.id}`, updatedItem)
-    .then(updatedItemDetails => {      
+    .then(updatedItemDetails => {
       dispatch({
         type: EDIT_ITEM,
         updatedItem: updatedItemDetails.data
